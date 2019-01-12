@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+// package frc.robot;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+// public class OI {
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -39,4 +39,67 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+// }
+
+package frc.robot;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+public class OI {
+	private XboxController xboxController = new XboxController(RobotMap.XBOX_CONTROLLER);
+	
+	private Hand rightHand = Hand.kRight; //private Hand leftHand  = Hand.kLeft;
+	private double leftDriverSpeed, rightDriverSpeed;
+	 
+	public OI() {
+	
+	JoystickButton upRightPad = new JoystickButton(xboxController,2);
+	JoystickButton downRightPad = new JoystickButton(xboxController,4);
+	
+	JoystickButton upLeftPad = new JoystickButton(xboxController,1);
+	JoystickButton downLeftPad = new JoystickButton(xboxController,3);
+	
+	JoystickButton leftBump = new JoystickButton(xboxController, 5);
+	JoystickButton rightBump = new JoystickButton(xboxController, 6);
+	
+	JoystickButton povUp = new JoystickButton(xboxController,9);
+	
+	
+	// rightBump.whenPressed(new RunIntake(1));
+	// leftBump.whenPressed(new RunIntake(-0.9));
+	
+	// rightBump.whenReleased(new RunIntake(0));
+	// leftBump.whenReleased(new RunIntake(0));
+	
+	// upRightPad.whenPressed(new RunLift(0.65));
+	// downRightPad.whenPressed(new RunLift(-0.8));
+	// upLeftPad.whenPressed(new RunLift(0.3));
+	// downLeftPad.whenPressed(new RunLift(-0.3));
+
+	// upRightPad.whenReleased(new RunLift(0.0));
+	// downRightPad.whenReleased(new RunLift(0.0));
+	// upLeftPad.whenReleased(new RunLift(0.0));
+	// downLeftPad.whenReleased(new RunLift(0.0));
+	
+	// povUp.whenPressed(new RunClimber(-1.0));
+	// povUp.whenReleased(new RunClimber(0));
+	
+	
+	}
+	
+	public double getLeftSpeed(){
+		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
+		return Math.abs(leftDriverSpeed)>0.1?leftDriverSpeed:0;
+	}
+	public double getRightSpeed(){
+		rightDriverSpeed = constrain(xboxController.getX(rightHand)+(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
+		return Math.abs(rightDriverSpeed)>0.1?rightDriverSpeed:0;
+	}
+	private double constrain(double value){
+		return Math.max(-1, Math.min(1, value));
+	}
+	
+	
 }
