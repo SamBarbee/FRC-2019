@@ -46,6 +46,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.RunElevator;
 
 public class OI {
 	private XboxController xboxController = new XboxController(RobotMap.XBOX_CONTROLLER);
@@ -73,15 +74,15 @@ public class OI {
 	// rightBump.whenReleased(new RunIntake(0));
 	// leftBump.whenReleased(new RunIntake(0));
 	
-	// upRightPad.whenPressed(new RunLift(0.65));
-	// downRightPad.whenPressed(new RunLift(-0.8));
-	// upLeftPad.whenPressed(new RunLift(0.3));
-	// downLeftPad.whenPressed(new RunLift(-0.3));
+	upRightPad.whenPressed(new RunElevator(0.65));
+	downRightPad.whenPressed(new RunElevator(-0.8));
+	upLeftPad.whenPressed(new RunElevator(0.3));
+	downLeftPad.whenPressed(new RunElevator(-0.3));
 
-	// upRightPad.whenReleased(new RunLift(0.0));
-	// downRightPad.whenReleased(new RunLift(0.0));
-	// upLeftPad.whenReleased(new RunLift(0.0));
-	// downLeftPad.whenReleased(new RunLift(0.0));
+	upRightPad.whenReleased(new RunElevator(0.0));
+	downRightPad.whenReleased(new RunElevator(0.0));
+	upLeftPad.whenReleased(new RunElevator(0.0));
+	downLeftPad.whenReleased(new RunElevator(0.0));
 	
 	// povUp.whenPressed(new RunClimber(-1.0));
 	// povUp.whenReleased(new RunClimber(0));
