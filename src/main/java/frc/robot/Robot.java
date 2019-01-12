@@ -177,7 +177,7 @@ public class Robot extends TimedRobot {
 		// AutonomousChooser.addObject("ScoreSide - Right", new ScoreSideLeft());
 		// AutonomousChooser.addObject("ScoreSide - Left", new ScoreSideRight());
 		// AutonomousChooser.addObject("Danktester", new Center2Cube());
-		SmartDashboard.putData("Auto mode", AutonomousChooser);
+		//SmartDashboard.putData("Auto mode", AutonomousChooser);
 		
 		CameraServer.getInstance().startAutomaticCapture();
 	};

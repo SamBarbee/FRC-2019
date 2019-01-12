@@ -4,6 +4,7 @@ import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class MotionMagicUnit {
 
@@ -25,7 +26,7 @@ public class MotionMagicUnit {
 	this.inchesPerRotation = inchesPerRotation;
 	this.allowedError = allowedError;
     }
-
+    
     private boolean isInMotionMagicMode() {
 	return talon.getControlMode().equals(ControlMode.MotionMagic);
     }

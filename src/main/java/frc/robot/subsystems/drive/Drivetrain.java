@@ -5,6 +5,7 @@ import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.subsystems.drive.motionmagic.MotionMagicPair;
 import frc.robot.subsystems.drive.motionmagic.MotionMagicUnit;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,10 +22,12 @@ public class Drivetrain extends Subsystem{
 	public static final double TURNING_CIRCUMFERENCE = Math.PI * ROBOT_WIDTH_INCHES;
 	public static final double EFFECTIVE_TURNING_CIRCUMFERENCE = TURNING_CIRCUMFERENCE * 1;
 	
-	private final TalonSRX left1 = new TalonSRX(RobotMap.DRIVE_LEFT1);
+	private final VictorSPX left1 = new VictorSPX(RobotMap.DRIVE_LEFT1);
 	private final VictorSPX left2 = new VictorSPX(RobotMap.DRIVE_LEFT2);
-	private final TalonSRX right1 = new TalonSRX(RobotMap.DRIVE_RIGHT1);
+	private final VictorSPX left3= new VictorSPX(RobotMap.DRIVE_LEFT3);
+	private final VictorSPX right1 = new VictorSPX(RobotMap.DRIVE_RIGHT1);
 	private final VictorSPX right2 = new VictorSPX(RobotMap.DRIVE_RIGHT2);
+	private final VictorSPX right3 = new VictorSPX(RobotMap.DRIVE_RIGHT3);
 	
 	public final MotionMagicPair motionMagic;
 	private MotionMagicUnit leftMM;
@@ -63,10 +66,11 @@ public class Drivetrain extends Subsystem{
 	private void configureTalons() {
 		
 		left2.follow(left1);
-		right2.follow(right2);
+		left3.follow(left1);
+		right2.follow(right1);
+		right3.follow(right1);
 
 		right1.setInverted(true);
-		right2.setInverted(true);
 		
 		left1.configNominalOutputForward(0, RobotMap.talonTimeoutMs);
 		left1.configNominalOutputReverse(0, RobotMap.talonTimeoutMs);
@@ -90,14 +94,14 @@ public class Drivetrain extends Subsystem{
 		right1.config_kI(RobotMap.DrivePID, RobotMap.driveI, RobotMap.talonTimeoutMs);
 		right1.config_kD(RobotMap.DrivePID, RobotMap.driveD, RobotMap.talonTimeoutMs);
 
-		leftMM = new MotionMagicUnit("Left", left1, INCHES_PER_REV, ALLOWED_ERROR);
-		rightMM = new MotionMagicUnit("Right", right1, INCHES_PER_REV, ALLOWED_ERROR);
+		// leftMM = new MotionMagicUnit("Left", left1, INCHES_PER_REV, ALLOWED_ERROR);
+		// rightMM = new MotionMagicUnit("Right", right1, INCHES_PER_REV, ALLOWED_ERROR);
 		
-		left1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.talonTimeoutMs);
-		left1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.talonTimeoutMs);
+		left1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0.value, 10, RobotMap.talonTimeoutMs);
+		left1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic.value, 10, RobotMap.talonTimeoutMs);
 		
-		right1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.talonTimeoutMs);
-		right1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.talonTimeoutMs);
+		right1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0.value, 10, RobotMap.talonTimeoutMs);
+		right1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic.value, 10, RobotMap.talonTimeoutMs);
 		
 	}
 	
