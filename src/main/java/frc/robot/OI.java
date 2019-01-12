@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.RunElevator;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunWrist;
 
 public class OI {
 	private XboxController xboxController = new XboxController(RobotMap.XBOX_CONTROLLER);
@@ -23,8 +24,10 @@ public class OI {
 	
 	JoystickButton leftBump = new JoystickButton(xboxController, 5);
 	JoystickButton rightBump = new JoystickButton(xboxController, 6);
+
+	JoystickButton povRight = new JoystickButton(xboxController, 7);
 	
-	JoystickButton povUp = new JoystickButton(xboxController,9);
+	//JoystickButton povUp = new JoystickButton(xboxController,9);
 	
 	
 	rightBump.whenPressed(new RunIntake(1));
@@ -42,7 +45,11 @@ public class OI {
 	downRightPad.whenReleased(new RunElevator(0.0));
 	upLeftPad.whenReleased(new RunElevator(0.0));
 	downLeftPad.whenReleased(new RunElevator(0.0));
-	
+
+	povRight.whenPressed(new RunWrist(1));
+
+	povRight.whenReleased(new RunWrist(0));
+
 	// povUp.whenPressed(new RunClimber(-1.0));
 	// povUp.whenReleased(new RunClimber(0));
 	

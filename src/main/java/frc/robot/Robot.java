@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final Intake intake = new Intake();
 	public static final Elevator elevator = new Elevator();
+	public static final Wrist wrist = new Wrist(); 
 	public static final OI OI = new OI();
 	public static enum Side {left,right,center};	
 	public static String gameData;

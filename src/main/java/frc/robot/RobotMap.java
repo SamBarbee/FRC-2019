@@ -20,6 +20,7 @@ public class RobotMap {
 	
 	public static final int INTAKE_LEFT = 4;
 	// public static final int INTAKE_RIGHT = 5;
+	public static final int WRIST = 5;
 	
 	public static final int ELEVATOR_LEFT = 6;
 	public static final int ELEVATOR_RIGHT = 3;

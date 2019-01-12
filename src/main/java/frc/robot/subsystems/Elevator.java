@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem{
 	TalonSRX motor1;
-	VictorSPX motor2;
-	public Elevator() {
+  VictorSPX motor2;
+  public Elevator() {
 		motor1 = new TalonSRX(RobotMap.ELEVATOR_LEFT);
 		motor2 = new VictorSPX(RobotMap.ELEVATOR_RIGHT);
 	}
