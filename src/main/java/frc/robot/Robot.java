@@ -16,12 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.OI;
 import frc.robot.commands.autonomous.DynamicAuton;
-// import frc.robot.commands.autonomous.AutoLineAuto;
-// import frc.robot.commands.autonomous.Center2Cube;
-// import frc.robot.commands.autonomous.ScoreSideLeft;
-// import frc.robot.commands.autonomous.ScoreSideRight;
-// import frc.robot.commands.autonomous.SwitchScoreLeft;
-// import frc.robot.commands.autonomous.SwitchScoreRight;
 import frc.robot.commands.drive.*;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.drive.Drivetrain;
@@ -33,25 +27,11 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake();
 	public static final Elevator elevator = new Elevator();
 	public static final OI OI = new OI();
-
-	public static enum Side {left,right,center};
-	
-	Command AutonomousCommand;
-	SendableChooser<DynamicAuton> AutonomousChooser = new SendableChooser<>();
-	
+	public static enum Side {left,right,center};	
 	public static String gameData;
 
 	@Override
 	public void robotInit() {
-		AutonomousChooser.addDefault("Auto Disabled", null);
-		// AutonomousChooser.addObject("Autoline", new AutoLineAuto());
-		// AutonomousChooser.addObject("Score Switch - Left Start", new SwitchScoreLeft());
-		// AutonomousChooser.addObject("Score Switch - Right Start", new SwitchScoreRight());
-		// AutonomousChooser.addObject("ScoreSide - Right", new ScoreSideLeft());
-		// AutonomousChooser.addObject("ScoreSide - Left", new ScoreSideRight());
-		// AutonomousChooser.addObject("Danktester", new Center2Cube());
-		//SmartDashboard.putData("Auto mode", AutonomousChooser);
-		
 		CameraServer.getInstance().startAutomaticCapture();
 	};
 	@Override
@@ -66,13 +46,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		DynamicAuton builder = AutonomousChooser.getSelected();
-		 
-		if (builder != null) {
-			AutonomousCommand = builder.build();
-			AutonomousCommand.start();
-		}
+		// do nothing for Sandstorm period
+		// Drive Joystick only
 	}
+
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -80,9 +57,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		if (AutonomousCommand != null) {
-			AutonomousCommand.cancel();
-		}
+		// There is no autonomous command to cancel
 	}
 
 	@Override
