@@ -7,10 +7,14 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.RunElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -18,10 +22,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem{
 	TalonSRX motor1;
-  VictorSPX motor2;
-  public Elevator() {
+	VictorSPX motor2;
+	boolean m_isClosedLoop = false;
+
+  	public Elevator() {
 		motor1 = new TalonSRX(RobotMap.ELEVATOR_LEFT);
 		motor2 = new VictorSPX(RobotMap.ELEVATOR_RIGHT);
+
+		motor2.follow(motor1);
+
+		motor1.setNeutralMode(NeutralMode.Brake);
+		motor2.setNeutralMode(NeutralMode.Brake);
+
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+		motor1.setSelectedSensorPosition(0,0,0);
 	}
 	protected void initDefaultCommand(){
 		setDefaultCommand(new RunElevator(0.0));
@@ -30,4 +44,36 @@ public class Elevator extends Subsystem{
 		motor1.set(ControlMode.PercentOutput, power);
 		motor2.set(ControlMode.PercentOutput, power);
 	}
+	public void ConfigClosedLoop() {
+		motor1.configVoltageCompSaturation(12.0, 0);
+		motor1.enableVoltageCompensation(true);
+
+		motor1.configNominalOutputForward(0.0, 0);
+		motor1.configNominalOutputReverse(0.0, 0);
+
+		motor1.configPeakOutputForward(1.0, 0);
+		motor1.configPeakOutputReverse(-0.4, 0);
+		motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
+		
+		motor1.set(ControlMode.Position,0.0);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+		motor1.setSensorPhase(false);
+
+		motor1.configClosedloopRamp(0.10,0);
+
+		motor1.config_kF(0, 0, 0);
+		motor1.config_kP(0, Constants.ELEVATOR_P,0);
+		motor1.config_kI(0, Constants.ELEVATOR_I,0);
+		motor1.config_kD(0, Constants.ELEVATOR_D,0);
+	}
+
+	public void SetElevatorPosition(double m_position, double arb_ff) {
+
+		if(!m_isClosedLoop) ConfigClosedLoop();
+
+		if(m_position<1) m_position=1;
+
+		motor1.set(ControlMode.Position, m_position, DemandType.ArbitraryFeedForward, arb_ff);
+	}
+
 }

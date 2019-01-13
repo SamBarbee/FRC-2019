@@ -18,34 +18,9 @@ public class RobotMap {
     public static final int DRIVE_RIGHT2 = 7;
     public static final int DRIVE_RIGHT3 = 7;
 	
-	public static final int INTAKE_LEFT = 4;
-	// public static final int INTAKE_RIGHT = 5;
+	public static final int INTAKE_MOTOR = 4;
 	public static final int WRIST = 5;
 	
 	public static final int ELEVATOR_LEFT = 6;
 	public static final int ELEVATOR_RIGHT = 3;
-	
-	public static int pidgeyAddress = 9;
-	
-	public static double driveF = 0.5;
-	public static double driveP = 0.6;
-	public static double driveI = 0.0;
-	public static double driveD = 0.3;
-	
-	public static double gyroP = 0.2;
-	public static double gyroI = 0.0;
-	public static double gyroD = 0.01;
-	
-	public static int talonTimeoutMs = 10;
-	public static int talonCruise = 500;
-	public static int talonAccel = 1500;
-	
-	//public static int RightSidePID = 0;
-	//public static int LeftSidePID = 1;
-	
-	public static final int DrivePID = 0;
-	
-	public static double wheelDiameter = 6;
-	
-	public static double autoLineDist = 11*12;
 }

@@ -7,19 +7,13 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.OI;
-import frc.robot.commands.autonomous.DynamicAuton;
-import frc.robot.commands.drive.*;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.drive.Drivetrain;
-import edu.wpi.first.wpilibj.CameraServer;
+import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.cameraserver.CameraServer;
 
 public class Robot extends TimedRobot {
 	//Subsystems
@@ -28,8 +22,6 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Wrist wrist = new Wrist(); 
 	public static final OI OI = new OI();
-	public static enum Side {left,right,center};	
-	public static String gameData;
 
 	@Override
 	public void robotInit() {
