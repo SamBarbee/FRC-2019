@@ -36,7 +36,7 @@ public class OI {
 	rightBump.whenReleased(new RunIntake(0));
 	leftBump.whenReleased(new RunIntake(0));
 	
-	upRightPad.whenPressed(new RunElevator(0.65));
+	upRightPad.whenPressed(new RunElevator(0.65)); // instead of RunElevator = SetElevator (feedfwdcontrol)
 	downRightPad.whenPressed(new RunElevator(-0.8));
 	upLeftPad.whenPressed(new RunElevator(0.3));
 	downLeftPad.whenPressed(new RunElevator(-0.3));
