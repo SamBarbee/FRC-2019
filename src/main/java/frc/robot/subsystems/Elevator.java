@@ -90,15 +90,14 @@ public class Elevator extends Subsystem{
 
 		if(motor1.getSensorCollection().isRevLimitSwitchClosed()) {
 			motor1.setSelectedSensorPosition(0,0,0);
-			return true;
-		}
+		} 
 		else {
 			while(!motor1.getSensorCollection().isRevLimitSwitchClosed()){
 				motor1.set(ControlMode.PercentOutput,-0.1);
 			}
 			motor1.set(ControlMode.PercentOutput,0.0);
 			motor1.setSelectedSensorPosition(0,0,0);
-			return true;
-		}	
+		}
+		return true;
 	}
 }

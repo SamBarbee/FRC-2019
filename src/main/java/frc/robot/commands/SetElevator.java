@@ -43,7 +43,6 @@ public class SetElevator extends Command {
         }
         else
         {
-
           if(Robot.elevator.GetElevatorPosition() < Constants.ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND)
           {
             Robot.elevator.SetElevatorPosition(m_position, Constants.ELEVATOR_ZERO_F);
