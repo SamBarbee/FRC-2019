@@ -4,7 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.RunElevator;
+import frc.robot.commands.SetElevator;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunWrist;
 
@@ -13,49 +13,52 @@ public class OI {
 	
 	private Hand rightHand = Hand.kRight; //private Hand leftHand  = Hand.kLeft;
 	private double leftDriverSpeed, rightDriverSpeed;
-	 
+
+	JoystickButton upRightPad;
+	JoystickButton downRightPad;
+	JoystickButton upLeftPad;
+	JoystickButton downLeftPad;
+	JoystickButton leftBump;
+	JoystickButton rightBump;
+	JoystickButton startButton;
+	JoystickButton menuButton;
+	JoystickButton leftJoystickButton;
+	JoystickButton rightJoystickButton;
+
 	public OI() {
 	
-	JoystickButton upRightPad = new JoystickButton(xboxController,2);
-	JoystickButton downRightPad = new JoystickButton(xboxController,4);
+	upRightPad = new JoystickButton(xboxController,2);
+	downRightPad = new JoystickButton(xboxController,4);
+	upLeftPad = new JoystickButton(xboxController,1);
+	downLeftPad = new JoystickButton(xboxController,3);
 	
-	JoystickButton upLeftPad = new JoystickButton(xboxController,1);
-	JoystickButton downLeftPad = new JoystickButton(xboxController,3);
-	
-	JoystickButton leftBump = new JoystickButton(xboxController, 5);
-	JoystickButton rightBump = new JoystickButton(xboxController, 6);
+	leftBump = new JoystickButton(xboxController, 5);
+	rightBump = new JoystickButton(xboxController, 6);
 
-	JoystickButton povRight = new JoystickButton(xboxController, 7);
-	
-	//JoystickButton povUp = new JoystickButton(xboxController,9);
+	startButton = new JoystickButton(xboxController, 7);
+	menuButton = new JoystickButton(xboxController, 8);
+
+	leftJoystickButton = new JoystickButton(xboxController, 9);
+	rightJoystickButton = new JoystickButton(xboxController, 10);
 	
 	
 	rightBump.whenPressed(new RunIntake(1));
-	leftBump.whenPressed(new RunIntake(-0.9));
+	leftBump.whenPressed(new RunIntake(-1));
 	
 	rightBump.whenReleased(new RunIntake(0));
 	leftBump.whenReleased(new RunIntake(0));
 	
-	upRightPad.whenPressed(new RunElevator(0.65)); // instead of RunElevator = SetElevator (feedfwdcontrol)
-	downRightPad.whenPressed(new RunElevator(-0.8));
-	upLeftPad.whenPressed(new RunElevator(0.3));
-	downLeftPad.whenPressed(new RunElevator(-0.3));
-
-	upRightPad.whenReleased(new RunElevator(0.0));
-	downRightPad.whenReleased(new RunElevator(0.0));
-	upLeftPad.whenReleased(new RunElevator(0.0));
-	downLeftPad.whenReleased(new RunElevator(0.0));
-
-	povRight.whenPressed(new RunWrist(1));
-
-	povRight.whenReleased(new RunWrist(0));
-
-	// povUp.whenPressed(new RunClimber(-1.0));
-	// povUp.whenReleased(new RunClimber(0));
-	
+	upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
+	downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
+	upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
+	downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));	
 	
 	}
 	
+	public double getPOVangle() {
+		return xboxController.getPOV();
+	}
+
 	public double getLeftSpeed(){
 		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
 		return Math.abs(leftDriverSpeed)>0.1?leftDriverSpeed:0;

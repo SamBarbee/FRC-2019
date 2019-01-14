@@ -24,6 +24,7 @@ public class Elevator extends Subsystem{
 	TalonSRX motor1;
 	VictorSPX motor2;
 	boolean m_isClosedLoop = false;
+	boolean m_isZeroed = false;
 
   	public Elevator() {
 		motor1 = new TalonSRX(RobotMap.ELEVATOR_LEFT);
@@ -55,16 +56,21 @@ public class Elevator extends Subsystem{
 		motor1.configPeakOutputReverse(-0.4, 0);
 		motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
 		
-		motor1.set(ControlMode.Position,0.0);
+		
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 		motor1.setSensorPhase(false);
 
+		if(!m_isZeroed) m_isZeroed = ZeroElevator();
+
+		motor1.set(ControlMode.Position,0.0);
 		motor1.configClosedloopRamp(0.10,0);
 
 		motor1.config_kF(0, 0, 0);
 		motor1.config_kP(0, Constants.ELEVATOR_P,0);
 		motor1.config_kI(0, Constants.ELEVATOR_I,0);
 		motor1.config_kD(0, Constants.ELEVATOR_D,0);
+
+		m_isClosedLoop = true;
 	}
 
 	public void SetElevatorPosition(double m_position, double arb_ff) {
@@ -76,4 +82,23 @@ public class Elevator extends Subsystem{
 		motor1.set(ControlMode.Position, m_position, DemandType.ArbitraryFeedForward, arb_ff);
 	}
 
+	public int GetElevatorPosition() {
+		return motor1.getSelectedSensorPosition();
+	}
+	public boolean ZeroElevator() {
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
+		if(motor1.getSensorCollection().isRevLimitSwitchClosed()) {
+			motor1.setSelectedSensorPosition(0,0,0);
+			return true;
+		}
+		else {
+			while(!motor1.getSensorCollection().isRevLimitSwitchClosed()){
+				motor1.set(ControlMode.PercentOutput,-0.1);
+			}
+			motor1.set(ControlMode.PercentOutput,0.0);
+			motor1.setSelectedSensorPosition(0,0,0);
+			return true;
+		}	
+	}
 }
