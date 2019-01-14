@@ -30,11 +30,6 @@ public class SetElevator extends Command {
   }
 
   protected void execute() {
-
-      double slope = (Constants.ELEVATOR_F_DOWN - Constants.ELEVATOR_ZERO_F) / (Constants.ELEVATOR_ZERO_NEUTRAL_POSITION - Constants.ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND);
-      double y_intercept = Constants.ELEVATOR_ZERO_F - (slope*Constants.ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND);
-      double linear_F = slope*(Robot.elevator.GetElevatorPosition()) + y_intercept;
-
       if(m_position > Constants.ELEVATOR_ZERO) {
         Robot.elevator.SetElevatorPosition(m_position, Constants.ELEVATOR_F);
         m_isFinished = true;
@@ -55,10 +50,12 @@ public class SetElevator extends Command {
             m_isFinished = true;
 
           }
+          double slope = (Constants.ELEVATOR_F_DOWN - Constants.ELEVATOR_ZERO_F) / (Constants.ELEVATOR_ZERO_NEUTRAL_POSITION - Constants.ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND);
+          double y_intercept = Constants.ELEVATOR_ZERO_F - (slope*Constants.ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND);
+          double linear_F = slope*(Robot.elevator.GetElevatorPosition()) + y_intercept;
           Robot.elevator.SetElevatorPosition(m_position, linear_F);
         }
       }
-
   }
 
   protected void end() {	
