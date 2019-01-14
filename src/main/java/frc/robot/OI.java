@@ -27,32 +27,32 @@ public class OI {
 
 	public OI() {
 	
-	upRightPad = new JoystickButton(xboxController,2);
-	downRightPad = new JoystickButton(xboxController,4);
-	upLeftPad = new JoystickButton(xboxController,1);
-	downLeftPad = new JoystickButton(xboxController,3);
-	
-	leftBump = new JoystickButton(xboxController, 5);
-	rightBump = new JoystickButton(xboxController, 6);
+		upRightPad = new JoystickButton(xboxController,2);
+		downRightPad = new JoystickButton(xboxController,4);
+		upLeftPad = new JoystickButton(xboxController,1);
+		downLeftPad = new JoystickButton(xboxController,3);
+		
+		leftBump = new JoystickButton(xboxController, 5);
+		rightBump = new JoystickButton(xboxController, 6);
 
-	startButton = new JoystickButton(xboxController, 7);
-	menuButton = new JoystickButton(xboxController, 8);
+		startButton = new JoystickButton(xboxController, 7);
+		menuButton = new JoystickButton(xboxController, 8);
 
-	leftJoystickButton = new JoystickButton(xboxController, 9);
-	rightJoystickButton = new JoystickButton(xboxController, 10);
-	
-	
-	rightBump.whenPressed(new RunIntake(1));
-	leftBump.whenPressed(new RunIntake(-1));
-	
-	rightBump.whenReleased(new RunIntake(0));
-	leftBump.whenReleased(new RunIntake(0));
-	
-	upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
-	downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
-	upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
-	downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));	
-	
+		leftJoystickButton = new JoystickButton(xboxController, 9);
+		rightJoystickButton = new JoystickButton(xboxController, 10);
+		
+		
+		rightBump.whenPressed(new RunIntake(1));
+		leftBump.whenPressed(new RunIntake(-1));
+		
+		rightBump.whenReleased(new RunIntake(0));
+		leftBump.whenReleased(new RunIntake(0));
+		
+		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
+		downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
+		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
+		downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));
+		
 	}
 	
 	public double getPOVangle() {

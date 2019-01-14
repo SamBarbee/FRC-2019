@@ -17,14 +17,11 @@ public class SetElevator extends Command {
   boolean m_isFinished;
 
   public SetElevator(double position) {
-    super();
     requires(Robot.elevator);
     
     m_position = position;
     m_isFinished = false;
   }
-
-  // Called once when the command executes
   protected void initialize() {
     m_isFinished = false;
   }

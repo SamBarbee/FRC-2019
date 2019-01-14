@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.RunElevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -39,7 +38,7 @@ public class Elevator extends Subsystem{
 		motor1.setSelectedSensorPosition(0,0,0);
 	}
 	protected void initDefaultCommand(){
-		setDefaultCommand(new RunElevator(0.0));
+		//setDefaultCommand(new RunElevator(0.0));
 	}
 	public void setMotors (double power) {
 		motor1.set(ControlMode.PercentOutput, power);
@@ -100,5 +99,8 @@ public class Elevator extends Subsystem{
 			motor1.setSelectedSensorPosition(0,0,0);
 			return true;
 		}	
+	}
+	public boolean IsClosedLoop() {
+		return m_isClosedLoop;
 	}
 }

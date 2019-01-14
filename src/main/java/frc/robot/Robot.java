@@ -1,10 +1,3 @@
-// /*----------------------------------------------------------------------------*/
-// /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-// /* Open Source Software - may be modified and shared by FRC teams. The code   */
-// /* must be accompanied by the FIRST BSD license file in the root directory of */
-// /* the project.                                                               */
-// /*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -12,8 +5,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.OI;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.commands.*;
 
 public class Robot extends TimedRobot {
 	//Subsystems
@@ -39,8 +32,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		// do nothing for Sandstorm period
-		// Drive Joystick only
+		if (!elevator.IsClosedLoop()){
+			elevator.ConfigClosedLoop();
+		}
+
 	}
 
 	@Override
@@ -50,12 +45,19 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// There is no autonomous command to cancel
+		if (!elevator.IsClosedLoop()){
+			elevator.ConfigClosedLoop();
+		}
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
+		if(OI.getPOVangle()==0) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_STOW));}
+		if(OI.getPOVangle()==90) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_HATCH));}
+		if(OI.getPOVangle()==180) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_SHOOT));}
+		if(OI.getPOVangle()==270) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_PICK_BALL));}
 	}
 
 	@Override

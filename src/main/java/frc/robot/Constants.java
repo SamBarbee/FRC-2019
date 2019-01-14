@@ -33,5 +33,24 @@ public class Constants {
 
 
 	//WRIST
+	public static final int WRIST_STOW = 3000;
+	public static final int WRIST_HATCH = 3000;
+	public static final int WRIST_SHOOT = 3000;
+	public static final int WRIST_PICK_BALL = 3000;
+	public static final int WRIST_HATCH_FLOOR = 3000;
+
+	public static final int WRIST_SOFT_LIMIT = 3000;
+
+	
+	public static final double WRIST_P = 0.05;
+	public static final double WRIST_I = 0.00;
+	public static final double WRIST_D = 0.50;
+
+	public static final double WRIST_ZERO = 1.0;
+	public static final double WRIST_ZERO_F = -0.0732;
+	public static final double WRIST_F = 0.1372;
+	public static final double WRIST_F_DOWN = ELEVATOR_F + 0.03;
+	public static final double WRIST_ZERO_NEUTRAL_POSITION = 90.0;
+	public static final double WRIST_ZERO_NEUTRAL_POSITION_DEADBAND = 60;
 	
 }
