@@ -19,15 +19,15 @@ public class RunWrist extends Command{
 	protected void initialize() {
 	}
 	public void execute() {
-		Robot.intake.setMotors(power);
+		//Robot.intake.setMotors(power);
 	}
 	protected boolean isFinished() {
 		return false;
 	}
 	protected void end() {
-		Robot.intake.setMotors(0);
+		//Robot.intake.setMotors(0);
 			}
 	protected void interrupted() {
-		Robot.intake.setMotors(0);
+		//Robot.intake.setMotors(0);
 	}
 }

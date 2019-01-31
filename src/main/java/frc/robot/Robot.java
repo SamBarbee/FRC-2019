@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
 	};
 	@Override
 	public void disabledInit() {
@@ -53,6 +53,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
+		System.out.println(elevator.GetElevatorPosition());
 
 		if(OI.getPOVangle()==0) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_STOW));}
 		if(OI.getPOVangle()==90) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_HATCH));}

@@ -26,15 +26,18 @@ public class Elevator extends Subsystem{
 	boolean m_isZeroed = false;
 
   	public Elevator() {
-		motor1 = new TalonSRX(RobotMap.ELEVATOR_LEFT);
-		motor2 = new VictorSPX(RobotMap.ELEVATOR_RIGHT);
+		motor1 = new TalonSRX(RobotMap.ELEVATOR_RIGHT);
+		motor2 = new VictorSPX(RobotMap.ELEVATOR_LEFT);
 
 		motor2.follow(motor1);
 
 		motor1.setNeutralMode(NeutralMode.Brake);
 		motor2.setNeutralMode(NeutralMode.Brake);
 
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+		motor1.setInverted(true);
+		motor2.setInverted(true);
+
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 		motor1.setSelectedSensorPosition(0,0,0);
 	}
 	protected void initDefaultCommand(){
@@ -52,16 +55,17 @@ public class Elevator extends Subsystem{
 		motor1.configNominalOutputReverse(0.0, 0);
 
 		motor1.configPeakOutputForward(1.0, 0);
-		motor1.configPeakOutputReverse(-0.4, 0);
-		motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
+		motor1.configPeakOutputReverse(-0.6, 0);
+		//motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
 		
 		
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
 		motor1.setSensorPhase(false);
 
 		if(!m_isZeroed) m_isZeroed = ZeroElevator();
 
-		motor1.set(ControlMode.Position,0.0);
+		else{motor1.set(ControlMode.Position,0.0);}
+
 		motor1.configClosedloopRamp(0.10,0);
 
 		motor1.config_kF(0, 0, 0);
@@ -85,7 +89,7 @@ public class Elevator extends Subsystem{
 		return motor1.getSelectedSensorPosition();
 	}
 	public boolean ZeroElevator() {
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 
 		if(motor1.getSensorCollection().isRevLimitSwitchClosed()) {
 			motor1.setSelectedSensorPosition(0,0,0);
@@ -97,6 +101,8 @@ public class Elevator extends Subsystem{
 			motor1.set(ControlMode.PercentOutput,0.0);
 			motor1.setSelectedSensorPosition(0,0,0);
 		}
+
+		motor1.set(ControlMode.Position,0.0);
 		return true;
 	}
 	public boolean IsClosedLoop() {

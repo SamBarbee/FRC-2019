@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetElevator;
+import frc.robot.commands.RunElevator;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunWrist;
 
@@ -42,16 +43,17 @@ public class OI {
 		rightJoystickButton = new JoystickButton(xboxController, 10);
 		
 		
-		rightBump.whenPressed(new RunIntake(1));
-		leftBump.whenPressed(new RunIntake(-1));
+		//rightBump.whenPressed(new RunElevator(0.2));
+		//leftBump.whenPressed(new RunElevator(-0.1));
 		
-		rightBump.whenReleased(new RunIntake(0));
-		leftBump.whenReleased(new RunIntake(0));
+		
+		//rightBump.whenReleased(new RunElevator(0));
+		//leftBump.whenReleased(new RunElevator(0));
 		
 		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
-		downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
-		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
-		downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));
+		//downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
+		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_ZERO));
+		//downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));*/
 		
 	}
 	
@@ -61,11 +63,11 @@ public class OI {
 
 	public double getLeftSpeed(){
 		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
-		return Math.abs(leftDriverSpeed)>0.1?leftDriverSpeed:0;
+		return Math.abs(leftDriverSpeed)>0.15?leftDriverSpeed:0;
 	}
 	public double getRightSpeed(){
 		rightDriverSpeed = constrain(xboxController.getX(rightHand)+(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
-		return Math.abs(rightDriverSpeed)>0.1?rightDriverSpeed:0;
+		return Math.abs(rightDriverSpeed)>0.15?rightDriverSpeed:0;
 	}
 	private double constrain(double value){
 		return Math.max(-1, Math.min(1, value));

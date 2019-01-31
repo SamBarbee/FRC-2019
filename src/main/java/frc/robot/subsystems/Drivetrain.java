@@ -34,7 +34,10 @@ public class Drivetrain extends Subsystem{
 
 		right2.follow(right1);
 		right3.follow(right1);
+
 		right1.setInverted(true);
+		right2.setInverted(true);
+		right3.setInverted(true);
 	}
 	
 	protected void initDefaultCommand(){
