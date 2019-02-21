@@ -34,8 +34,8 @@ public class Elevator extends Subsystem{
 		motor1.setNeutralMode(NeutralMode.Brake);
 		motor2.setNeutralMode(NeutralMode.Brake);
 
-		motor1.setInverted(true);
-		motor2.setInverted(true);
+		motor1.setInverted(false);
+		motor2.setInverted(false);
 
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 		motor1.setSelectedSensorPosition(0,0,0);
@@ -96,7 +96,7 @@ public class Elevator extends Subsystem{
 		} 
 		else {
 			while(!motor1.getSensorCollection().isRevLimitSwitchClosed()){
-				motor1.set(ControlMode.PercentOutput,-0.1);
+				motor1.set(ControlMode.PercentOutput,-0.2);
 			}
 			motor1.set(ControlMode.PercentOutput,0.0);
 			motor1.setSelectedSensorPosition(0,0,0);

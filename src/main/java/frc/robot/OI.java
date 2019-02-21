@@ -5,15 +5,14 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetElevator;
-import frc.robot.commands.RunElevator;
-import frc.robot.commands.RunIntake;
-import frc.robot.commands.RunWrist;
+import frc.robot.commands.RunHatch;
+import frc.robot.commands.SetWrist;
 
 public class OI {
 	private XboxController xboxController = new XboxController(RobotMap.XBOX_CONTROLLER);
 	
-	private Hand rightHand = Hand.kRight; //private Hand leftHand  = Hand.kLeft;
-	private double leftDriverSpeed, rightDriverSpeed;
+	private Hand rightHand = Hand.kRight; private Hand leftHand  = Hand.kLeft;
+	private double leftDriverSpeed, rightDriverSpeed,wristSpeed,ballSpeed;
 
 	JoystickButton upRightPad;
 	JoystickButton downRightPad;
@@ -43,17 +42,21 @@ public class OI {
 		rightJoystickButton = new JoystickButton(xboxController, 10);
 		
 		
-		//rightBump.whenPressed(new RunElevator(0.2));
-		//leftBump.whenPressed(new RunElevator(-0.1));
+		leftJoystickButton.whenPressed(new SetWrist(0.0));
+
+		rightBump.whenPressed(new RunHatch(1.0));
+		leftBump.whenPressed(new RunHatch(-0.5));
+		menuButton.whenPressed(new RunHatch(-0.3));
 		
 		
-		//rightBump.whenReleased(new RunElevator(0));
-		//leftBump.whenReleased(new RunElevator(0));
+		menuButton.whenReleased(new RunHatch(0.0));
+		rightBump.whenReleased(new RunHatch(0.0));
+		leftBump.whenReleased(new RunHatch(0.0));
 		
-		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
-		//downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
-		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_ZERO));
-		//downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_PICK_BALL));*/
+		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
+		downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
+		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
+		downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_ZERO));
 		
 	}
 	
@@ -61,6 +64,15 @@ public class OI {
 		return xboxController.getPOV();
 	}
 
+	
+	public double getBallSpeed(){
+		ballSpeed = xboxController.getTriggerAxis(leftHand)-xboxController.getTriggerAxis(rightHand);
+		return ballSpeed;
+	}
+	public double getWristSpeed(){
+		wristSpeed= xboxController.getY(leftHand);
+		return wristSpeed;
+	}
 	public double getLeftSpeed(){
 		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
 		return Math.abs(leftDriverSpeed)>0.15?leftDriverSpeed:0;

@@ -15,6 +15,9 @@ public class SetWrist extends Command {
 
   double m_position;
   boolean m_isFinished;
+  public SetWrist() {
+    requires(Robot.wrist);
+  }
 
   public SetWrist(double position) {
     requires(Robot.wrist);

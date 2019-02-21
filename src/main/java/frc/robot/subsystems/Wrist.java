@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.commands.WristWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -10,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 
 public class Wrist extends Subsystem{
 	private TalonSRX motor1;
@@ -21,10 +23,12 @@ public class Wrist extends Subsystem{
 
 		motor1.setNeutralMode(NeutralMode.Brake);
 		
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.Analog,0,0);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+
+		motor1.set(ControlMode.PercentOutput, 0);
 	}
 	protected void initDefaultCommand(){
-		
+		setDefaultCommand(new WristWithJoystick());
 	}
 	public void setMotors (double power) {
 		motor1.set(ControlMode.PercentOutput, power);
@@ -37,14 +41,16 @@ public class Wrist extends Subsystem{
 		motor1.configNominalOutputReverse(0.0, 0);
 
 		motor1.configPeakOutputForward(1.0, 0);
-		motor1.configPeakOutputReverse(-0.4, 0);
+		motor1.configPeakOutputReverse(-1.0, 0);
 		motor1.configForwardSoftLimitThreshold(Constants.WRIST_SOFT_LIMIT, 0);
 		
 		
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.Analog,0,0);
-		motor1.setSensorPhase(false);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+		motor1.setSensorPhase(true);
 
-		motor1.set(ControlMode.Position,0.0);
+		motor1.setInverted(true);
+
+		motor1.set(ControlMode.Position,motor1.getSelectedSensorPosition());
 		motor1.configClosedloopRamp(0.10,0);
 
 		motor1.config_kF(0, 0, 0);
