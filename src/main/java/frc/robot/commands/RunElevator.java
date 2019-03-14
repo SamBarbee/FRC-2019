@@ -1,6 +1,9 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RunElevator extends Command{
@@ -16,7 +19,7 @@ public class RunElevator extends Command{
 	protected void initialize() {
 	}
 	public void execute() {
-		Robot.elevator.setMotors(power);
+		Robot.elevator.motor4.set(ControlMode.PercentOutput, 0.2);
 	}
 	protected boolean isFinished() {
 		return false;

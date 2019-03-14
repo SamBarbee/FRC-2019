@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetElevator;
+import frc.robot.commands.RunElevator;
 import frc.robot.commands.RunHatch;
 import frc.robot.commands.SetWrist;
 
@@ -45,11 +46,11 @@ public class OI {
 		leftJoystickButton.whenPressed(new SetWrist(0.0));
 
 		rightBump.whenPressed(new RunHatch(1.0));
-		leftBump.whenPressed(new RunHatch(-0.5));
-		menuButton.whenPressed(new RunHatch(-0.3));
+		leftBump.whenPressed(new RunHatch(-0.3));
+		//menuButton.whenPressed(new RunElevator(0.3));
 		
 		
-		menuButton.whenReleased(new RunHatch(0.0));
+		//menuButton.whenReleased(new RunElevator(0.0));
 		rightBump.whenReleased(new RunHatch(0.0));
 		leftBump.whenReleased(new RunHatch(0.0));
 		
@@ -67,11 +68,11 @@ public class OI {
 	
 	public double getBallSpeed(){
 		ballSpeed = xboxController.getTriggerAxis(leftHand)-xboxController.getTriggerAxis(rightHand);
-		return ballSpeed;
+		return ballSpeed/2;
 	}
 	public double getWristSpeed(){
 		wristSpeed= xboxController.getY(leftHand);
-		return wristSpeed;
+		return wristSpeed/1.5;
 	}
 	public double getLeftSpeed(){
 		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));

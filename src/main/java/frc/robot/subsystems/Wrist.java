@@ -46,9 +46,9 @@ public class Wrist extends Subsystem{
 		
 		
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
-		motor1.setSensorPhase(true);
+		motor1.setSensorPhase(false);
 
-		motor1.setInverted(true);
+		motor1.setInverted(false);
 
 		motor1.set(ControlMode.Position,motor1.getSelectedSensorPosition());
 		motor1.configClosedloopRamp(0.10,0);

@@ -20,22 +20,30 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem{
-	TalonSRX motor1;
-	VictorSPX motor2;
+	public TalonSRX motor1,motor3;
+	public VictorSPX motor2,motor4;
 	boolean m_isClosedLoop = false;
 	boolean m_isZeroed = false;
 
   	public Elevator() {
-		motor1 = new TalonSRX(RobotMap.ELEVATOR_RIGHT);
-		motor2 = new VictorSPX(RobotMap.ELEVATOR_LEFT);
+		motor1 = new TalonSRX(RobotMap.ELEVATOR_RIGHT1);
+		motor2 = new VictorSPX(RobotMap.ELEVATOR_RIGHT2);
+		motor3 = new TalonSRX(RobotMap.ELEVATOR_LEFT1);
+		motor4 = new VictorSPX(RobotMap.ELEVATOR_LEFT2);
 
 		motor2.follow(motor1);
+		motor3.follow(motor1);
+		motor4.follow(motor1);
 
 		motor1.setNeutralMode(NeutralMode.Brake);
 		motor2.setNeutralMode(NeutralMode.Brake);
+		motor3.setNeutralMode(NeutralMode.Brake);
+		motor4.setNeutralMode(NeutralMode.Brake);
 
-		motor1.setInverted(false);
-		motor2.setInverted(false);
+		motor1.setInverted(true);
+		motor2.setInverted(true);
+		motor3.setInverted(true);
+		motor4.setInverted(false);
 
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 		motor1.setSelectedSensorPosition(0,0,0);

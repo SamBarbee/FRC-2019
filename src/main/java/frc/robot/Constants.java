@@ -10,23 +10,23 @@ public class Constants {
 	//INTAKE
 
 	//ELEVATOR
-	public static final int ELEVATOR_LEVEL3 = 19200;
+	public static final int ELEVATOR_LEVEL3 = 26000;
 	public static final int ELEVATOR_LEVEL2 = 10000;
 	public static final int ELEVATOR_CARGOSHIP_BALL = 4000;
 
 	public static final int ELEVATOR_SOFT_LIMIT = 20000;
 
 	
-	public static final double ELEVATOR_P = 0.35;
-	public static final double ELEVATOR_I = 0.00;
-	public static final double ELEVATOR_D = 0.5;
+	public static final double ELEVATOR_P = 0.1125;//0.35;
+	public static final double ELEVATOR_I = 0.0;//0.00;
+	public static final double ELEVATOR_D = 0.4;//0.5;
  
 	public static final double ELEVATOR_ZERO = 1.0;
-	public static final double ELEVATOR_ZERO_F = -0.15;
-	public static final double ELEVATOR_F = 0.25;
-	public static final double ELEVATOR_F_DOWN = 0.25;
-	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION = 750.0;
-	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND = 100.0;
+	public static final double ELEVATOR_ZERO_F = -0.125;
+	public static final double ELEVATOR_F = 0.07875;
+	public static final double ELEVATOR_F_DOWN = 0.05;
+	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION = 800.0;
+	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND = 50.0;
 
 
 
