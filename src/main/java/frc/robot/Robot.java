@@ -17,6 +17,7 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Wrist wrist = new Wrist(); 
 	public static final OI OI = new OI();
+	public static final Limelight limelight = new Limelight(); 
 
 	@Override
 	public void robotInit() {
@@ -66,12 +67,12 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		System.out.println(elevator.GetElevatorPosition());
+		//System.out.println((Robot.elevator.setpoint));
 
-		if(OI.getPOVangle()==0) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_STOW));}
-		if(OI.getPOVangle()==90) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_HATCH));}
-		if(OI.getPOVangle()==180) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_SHOOT));}
-		if(OI.getPOVangle()==270) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_PICK_BALL));}
+		if(OI.getPOVangle()==0) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_3));}
+		// if(OI.getPOVangle()==90) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_2));}
+		if(OI.getPOVangle()==180) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_2));}
+	// 	if(OI.getPOVangle()==270) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_PICK_BALL));}
 	}
 
 	@Override

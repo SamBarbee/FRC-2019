@@ -19,7 +19,7 @@ public class RunElevator extends Command{
 	protected void initialize() {
 	}
 	public void execute() {
-		Robot.elevator.motor4.set(ControlMode.PercentOutput, 0.2);
+		Robot.elevator.motor1.set(ControlMode.PercentOutput, power);
 	}
 	protected boolean isFinished() {
 		return false;

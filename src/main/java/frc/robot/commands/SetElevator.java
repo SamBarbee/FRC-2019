@@ -18,7 +18,9 @@ public class SetElevator extends Command {
 
   public SetElevator(double position) {
     requires(Robot.elevator);
-    
+
+    System.out.println((Robot.elevator.BALL_POSITION));
+
     m_position = position;
     m_isFinished = false;
   }

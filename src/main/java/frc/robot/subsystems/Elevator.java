@@ -24,6 +24,8 @@ public class Elevator extends Subsystem{
 	public VictorSPX motor2,motor4;
 	boolean m_isClosedLoop = false;
 	boolean m_isZeroed = false;
+	public double setpoint=1.0;
+	public double BALL_POSITION =1.0;
 
   	public Elevator() {
 		motor1 = new TalonSRX(RobotMap.ELEVATOR_RIGHT1);
@@ -63,8 +65,8 @@ public class Elevator extends Subsystem{
 		motor1.configNominalOutputReverse(0.0, 0);
 
 		motor1.configPeakOutputForward(1.0, 0);
-		motor1.configPeakOutputReverse(-0.6, 0);
-		//motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
+		motor1.configPeakOutputReverse(-0.4, 0);
+		motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
 		
 		
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
@@ -92,7 +94,6 @@ public class Elevator extends Subsystem{
 
 		motor1.set(ControlMode.Position, m_position, DemandType.ArbitraryFeedForward, arb_ff);
 	}
-
 	public int GetElevatorPosition() {
 		return motor1.getSelectedSensorPosition();
 	}

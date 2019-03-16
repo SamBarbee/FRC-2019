@@ -15,7 +15,7 @@ public class HatchRoller extends Subsystem{
 	public HatchRoller() {
 		HatchMotor  = new TalonSRX(RobotMap.HACTH_ROLLER);
 
-		HatchMotor.setInverted(true);
+		HatchMotor.setInverted(false);
 
 	}
 	protected void initDefaultCommand(){

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetElevator;
-import frc.robot.commands.RunElevator;
 import frc.robot.commands.RunHatch;
 import frc.robot.commands.SetWrist;
 
@@ -27,7 +26,7 @@ public class OI {
 	JoystickButton rightJoystickButton;
 
 	public OI() {
-	
+
 		upRightPad = new JoystickButton(xboxController,2);
 		downRightPad = new JoystickButton(xboxController,4);
 		upLeftPad = new JoystickButton(xboxController,1);
@@ -56,9 +55,9 @@ public class OI {
 		
 		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
 		downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));
-		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_CARGOSHIP_BALL));
+		upLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_BALL_1));
 		downLeftPad.whenPressed(new SetElevator(Constants.ELEVATOR_ZERO));
-		
+
 	}
 	
 	public double getPOVangle() {
@@ -67,20 +66,25 @@ public class OI {
 
 	
 	public double getBallSpeed(){
-		ballSpeed = xboxController.getTriggerAxis(leftHand)-xboxController.getTriggerAxis(rightHand);
+		ballSpeed = xboxController.getTriggerAxis(leftHand)/1.5-xboxController.getTriggerAxis(rightHand);
 		return ballSpeed/2;
 	}
 	public double getWristSpeed(){
 		wristSpeed= xboxController.getY(leftHand);
-		return wristSpeed/1.5;
+		return wristSpeed;
 	}
 	public double getLeftSpeed(){
 		leftDriverSpeed = constrain(xboxController.getX(rightHand)-(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
-		return Math.abs(leftDriverSpeed)>0.15?leftDriverSpeed:0;
+		return Math.abs(leftDriverSpeed)>0.1?leftDriverSpeed:0;
 	}
 	public double getRightSpeed(){
 		rightDriverSpeed = constrain(xboxController.getX(rightHand)+(xboxController.getY(rightHand)/Math.abs(((xboxController.getX(rightHand)/2)+Math.signum(xboxController.getY(rightHand))))));
-		return Math.abs(rightDriverSpeed)>0.15?rightDriverSpeed:0;
+		return Math.abs(rightDriverSpeed)>0.1?-rightDriverSpeed:0;
+	}
+	public boolean trackAllowed() {
+		if(menuButton.get())
+			return true;
+		return false;
 	}
 	private double constrain(double value){
 		return Math.max(-1, Math.min(1, value));

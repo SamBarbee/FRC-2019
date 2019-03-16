@@ -5,16 +5,19 @@ package frc.robot;
 
 public class Constants {
 	//DRIVE
-	
+	public static final double LIMELIGHT_KP = 0.125;
+	public static final double LIMELIGHT_THRESHOLD = 7.5;
 	
 	//INTAKE
 
 	//ELEVATOR
 	public static final int ELEVATOR_LEVEL3 = 26000;
-	public static final int ELEVATOR_LEVEL2 = 10000;
-	public static final int ELEVATOR_CARGOSHIP_BALL = 4000;
+	public static final int ELEVATOR_LEVEL2 = 13000;
+	public static final int ELEVATOR_BALL_1 = 4000;
+	public static final int ELEVATOR_BALL_2 = 17000;
+	public static final int ELEVATOR_BALL_3 = 30000;
 
-	public static final int ELEVATOR_SOFT_LIMIT = 20000;
+	public static final int ELEVATOR_SOFT_LIMIT = 31000;
 
 	
 	public static final double ELEVATOR_P = 0.1125;//0.35;
@@ -23,7 +26,7 @@ public class Constants {
  
 	public static final double ELEVATOR_ZERO = 1.0;
 	public static final double ELEVATOR_ZERO_F = -0.125;
-	public static final double ELEVATOR_F = 0.07875;
+	public static final double ELEVATOR_F = 0.07;
 	public static final double ELEVATOR_F_DOWN = 0.05;
 	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION = 800.0;
 	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND = 50.0;
