@@ -28,6 +28,9 @@ public class DriveWithJoystick extends Command {
 				r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP);
 			}
 		}
+		// else if(Robot.OI.flashyBoi()) {
+		// 	Robot.limelight.setLedMode(Limelight.LED_BLINK);
+		// }
 		else {
 			Robot.limelight.setLedMode(Limelight.LED_OFF);
 		}

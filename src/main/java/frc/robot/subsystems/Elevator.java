@@ -66,15 +66,17 @@ public class Elevator extends Subsystem{
 
 		motor1.configPeakOutputForward(1.0, 0);
 		motor1.configPeakOutputReverse(-0.4, 0);
-		motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
+		//motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
 		
 		
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
 		motor1.setSensorPhase(false);
 
-		if(!m_isZeroed) m_isZeroed = ZeroElevator();
+		//if(!m_isZeroed) m_isZeroed = ZeroElevator();
 
-		else{motor1.set(ControlMode.Position,0.0);}
+		motor1.set(ControlMode.Position,0.0);
+
+		motor1.setSelectedSensorPosition(0,0,0);
 
 		motor1.configClosedloopRamp(0.10,0);
 

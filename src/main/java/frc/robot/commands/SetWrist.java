@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class SetWrist extends Command {
@@ -31,32 +30,8 @@ public class SetWrist extends Command {
   }
   @Override
   protected void execute() {
-      if(m_position > Constants.WRIST_ZERO) {
-        Robot.wrist.SetWristPosition(m_position, Constants.WRIST_F);
+        Robot.wrist.SetWristPosition(m_position);
         m_isFinished = true;
-      }
-
-      if(m_isFinished == false)
-      {
-        if(Robot.wrist.GetWristPosition() > Constants.WRIST_ZERO_NEUTRAL_POSITION )
-        {
-          Robot.wrist.SetWristPosition(m_position, Constants.WRIST_F_DOWN);
-        }
-        else
-        {
-
-          if(Robot.wrist.GetWristPosition() < Constants.WRIST_ZERO_NEUTRAL_POSITION_DEADBAND)
-          {
-            Robot.wrist.SetWristPosition(m_position, Constants.WRIST_ZERO_F);
-            m_isFinished = true;
-
-          }
-          double slope = (Constants.WRIST_F_DOWN - Constants.WRIST_ZERO_F) / (Constants.WRIST_ZERO_NEUTRAL_POSITION - Constants.WRIST_ZERO_NEUTRAL_POSITION_DEADBAND);
-          double y_intercept = Constants.WRIST_ZERO_F - (slope*Constants.WRIST_ZERO_NEUTRAL_POSITION_DEADBAND);
-          double linear_F = slope*(Robot.wrist.GetWristPosition()) + y_intercept;
-          Robot.wrist.SetWristPosition(m_position, linear_F);
-        }
-      }
   }
   @Override
   protected boolean isFinished() {

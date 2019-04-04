@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.SetElevator;
+import frc.robot.commands.SetPushy;
 import frc.robot.commands.RunHatch;
+import frc.robot.commands.ScoreHatch;
 import frc.robot.commands.SetWrist;
 
 public class OI {
@@ -22,7 +24,7 @@ public class OI {
 	JoystickButton rightBump;
 	JoystickButton startButton;
 	JoystickButton menuButton;
-	JoystickButton leftJoystickButton;
+	public JoystickButton leftJoystickButton;
 	JoystickButton rightJoystickButton;
 
 	public OI() {
@@ -42,12 +44,14 @@ public class OI {
 		rightJoystickButton = new JoystickButton(xboxController, 10);
 		
 		
-		leftJoystickButton.whenPressed(new SetWrist(0.0));
+		//leftJoystickButton.whenPressed(new SetWrist(Constants.WRIST_HATCH));
 
-		rightBump.whenPressed(new RunHatch(1.0));
-		leftBump.whenPressed(new RunHatch(-0.3));
+		rightBump.whenPressed(new RunHatch(0.4));
+		leftBump.whenPressed(new ScoreHatch());
 		//menuButton.whenPressed(new RunElevator(0.3));
 		
+		startButton.whenPressed(new SetPushy(true));
+		startButton.whenReleased(new SetPushy(false));
 		
 		//menuButton.whenReleased(new RunElevator(0.0));
 		rightBump.whenReleased(new RunHatch(0.0));
@@ -64,10 +68,13 @@ public class OI {
 		return xboxController.getPOV();
 	}
 
+	// public boolean flashyBoi () {
+	// 	return startButton.get();
+	// }
 	
 	public double getBallSpeed(){
-		ballSpeed = xboxController.getTriggerAxis(leftHand)/1.5-xboxController.getTriggerAxis(rightHand);
-		return ballSpeed/2;
+		ballSpeed = xboxController.getTriggerAxis(leftHand)-xboxController.getTriggerAxis(rightHand);
+		return ballSpeed;
 	}
 	public double getWristSpeed(){
 		wristSpeed= xboxController.getY(leftHand);

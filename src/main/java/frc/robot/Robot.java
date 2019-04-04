@@ -24,17 +24,21 @@ public class Robot extends TimedRobot {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();;
 		camera.setFPS(15);
 		camera.setResolution(320, 240); //320 = width, 240 = height
+
+		limelight.setLedMode(Limelight.LED_OFF);
 		
 	
 	};
 	@Override
 	public void disabledInit() {
-
+		Robot.limelight.setLedMode(Limelight.LED_OFF);
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Robot.limelight.setLedMode(Limelight.LED_OFF);
+		System.out.printf("%d",wrist.GetWristPosition());
 	}
 
 	@Override

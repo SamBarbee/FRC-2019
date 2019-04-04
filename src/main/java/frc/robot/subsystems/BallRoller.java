@@ -12,23 +12,19 @@ import frc.robot.commands.BallWithJoystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BallRoller extends Subsystem{
-	TalonSRX LeftRoller;
-	TalonSRX RightRoller;
+	TalonSRX Roller;
 	public BallRoller() {
-		LeftRoller  = new TalonSRX(RobotMap.LEFT_ROLLER);
-		RightRoller  = new TalonSRX(RobotMap.RIGHT_ROLLER);
+		Roller  = new TalonSRX(RobotMap.BALL_ROLLER);
 
-		LeftRoller.setNeutralMode(NeutralMode.Brake);
-		RightRoller.setNeutralMode(NeutralMode.Brake);
-
-		LeftRoller.setInverted(true);
-		RightRoller.setInverted(true);
+		Roller.setNeutralMode(NeutralMode.Brake);
+	
+		Roller.setInverted(true);
+	
 	}
 	protected void initDefaultCommand(){
 		setDefaultCommand(new BallWithJoystick());
 	}
 	public void setMotors (double power) {
-		LeftRoller.set(ControlMode.PercentOutput, power);
-		RightRoller.set(ControlMode.PercentOutput, power);
+		Roller.set(ControlMode.PercentOutput, power);
 	}
 }

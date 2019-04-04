@@ -5,7 +5,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.WristWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
+// import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -23,7 +23,9 @@ public class Wrist extends Subsystem{
 
 		motor1.setNeutralMode(NeutralMode.Brake);
 		
-		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute,0,0);
+
+		motor1.setInverted(false);
 
 		motor1.set(ControlMode.PercentOutput, 0);
 	}
@@ -42,16 +44,16 @@ public class Wrist extends Subsystem{
 
 		motor1.configPeakOutputForward(1.0, 0);
 		motor1.configPeakOutputReverse(-1.0, 0);
-		motor1.configForwardSoftLimitThreshold(Constants.WRIST_SOFT_LIMIT, 0);
+		//motor1.configForwardSoftLimitThreshold(Constants.WRIST_SOFT_LIMIT, 0);
 		
 		
 		motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,0);
 		motor1.setSensorPhase(false);
 
-		motor1.setInverted(false);
+		motor1.setSelectedSensorPosition(0,0,0);
 
-		motor1.set(ControlMode.Position,motor1.getSelectedSensorPosition());
-		motor1.configClosedloopRamp(0.10,0);
+		motor1.set(ControlMode.Position,0.0);
+		motor1.configClosedloopRamp(0.1,0);
 
 		motor1.config_kF(0, 0, 0);
 		motor1.config_kP(0, Constants.WRIST_P,0);
@@ -61,13 +63,14 @@ public class Wrist extends Subsystem{
 		m_isClosedLoop = true;
 	}
 
-	public void SetWristPosition(double m_position, double arb_ff) {
+	public void SetWristPosition(double m_position) {
 
 		if(!m_isClosedLoop) ConfigClosedLoop();
 
-		if(m_position<1) m_position=1;
+		// if(m_position>Constants.WRIST_SOFT_FWD){m_position=Constants.WRIST_SOFT_FWD;}
+		// if(m_position<Constants.WRIST_SOFT_REV){m_position=Constants.WRIST_SOFT_REV;}
 
-		motor1.set(ControlMode.Position, m_position, DemandType.ArbitraryFeedForward, arb_ff);
+		motor1.set(ControlMode.Position, m_position);
 	}
 
 	public int GetWristPosition() {

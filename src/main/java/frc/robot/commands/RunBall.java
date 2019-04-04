@@ -5,32 +5,29 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 
-public class RunHatch extends Command{
+public class RunBall extends Command{
 	private double power = 0;
 	
-	public RunHatch() {
-		requires(Robot.hatchroller);
+	public RunBall() {
+		requires(Robot.ballroller);
 			}
-	public RunHatch(double power) {
-		requires(Robot.hatchroller);
+	public RunBall(double power) {
+		requires(Robot.ballroller);
 		this.power = power;
 			}
 	@Override
 	protected void initialize() {
 	}
 	public void execute() {
-		Robot.hatchroller.setMotors(power);
-		if(power>0.1){
-			Robot.wrist.SetWristPosition(-100);
-		}
+		Robot.ballroller.setMotors(power);
 	}
 	protected boolean isFinished() {
 		return false;
 	}
 	protected void end() {
-		Robot.hatchroller.setMotors(0);
+		Robot.ballroller.setMotors(0);
 			}
 	protected void interrupted() {
-		Robot.hatchroller.setMotors(0);
+		Robot.ballroller.setMotors(0);
 	}
 }
