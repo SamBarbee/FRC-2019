@@ -26,6 +26,8 @@ public class DriveWithJoystick extends Command {
 			if(Robot.limelight.getTx() > Constants.LIMELIGHT_THRESHOLD || Robot.limelight.getTx() < -Constants.LIMELIGHT_THRESHOLD) {
 				l +=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
 				r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
+
+				oldTx = Robot.limelight.getTx();
 			}
 		}
 		// else if(Robot.OI.flashyBoi()) {
