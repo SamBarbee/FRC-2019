@@ -6,7 +6,8 @@ package frc.robot;
 public class Constants {
 	//DRIVE
 	public static final double LIMELIGHT_KP = 0.0175;
-	public static final double LIMELIGHT_THRESHOLD = 1.0;
+	public static final double LIMELIGHT_KD = 0.005;
+	public static final double LIMELIGHT_THRESHOLD = 5.0;
 	
 	//INTAKE
 

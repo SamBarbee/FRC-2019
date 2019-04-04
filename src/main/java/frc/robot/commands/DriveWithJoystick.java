@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveWithJoystick extends Command {
 
-	double l,r;
+	double l,r,oldTx;
 
 	public DriveWithJoystick() {
 		requires(Robot.drivetrain);
@@ -24,8 +24,8 @@ public class DriveWithJoystick extends Command {
 			Robot.limelight.setLedMode(Limelight.LED_ON);
 
 			if(Robot.limelight.getTx() > Constants.LIMELIGHT_THRESHOLD || Robot.limelight.getTx() < -Constants.LIMELIGHT_THRESHOLD) {
-				l +=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP);
-				r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP);
+				l +=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
+				r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
 			}
 		}
 		// else if(Robot.OI.flashyBoi()) {
