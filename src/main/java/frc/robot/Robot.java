@@ -18,12 +18,18 @@ public class Robot extends TimedRobot {
 	public static final Wrist wrist = new Wrist(); 
 	public static final OI OI = new OI();
 	public static final Limelight limelight = new Limelight(); 
-
+	private static double newInterval = 0.015;
+	public Robot(){
+		super(newInterval);
+	}
 	@Override
 	public void robotInit() {
+
+		
+
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();;
 		camera.setFPS(15);
-		camera.setResolution(320, 240); //320 = width, 240 = height
+		camera.setResolution(320, 240); // used to be 320 = width, 240 = height
 
 		limelight.setLedMode(Limelight.LED_OFF);
 		
@@ -38,7 +44,7 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		Robot.limelight.setLedMode(Limelight.LED_OFF);
-		System.out.printf("%d",wrist.GetWristPosition());
+		//System.out.printf("%d",wrist.GetWristPosition());
 	}
 
 	@Override
@@ -76,7 +82,7 @@ public class Robot extends TimedRobot {
 		if(OI.getPOVangle()==0) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_3));}
 		// if(OI.getPOVangle()==90) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_2));}
 		if(OI.getPOVangle()==180) {Scheduler.getInstance().add(new SetElevator(Constants.ELEVATOR_BALL_2));}
-	// 	if(OI.getPOVangle()==270) {Scheduler.getInstance().add(new SetWrist(Constants.WRIST_PICK_BALL));}
+	 	if(OI.getPOVangle()==270) {Scheduler.getInstance().add(new CargoShipScore());}
 	}
 
 	@Override

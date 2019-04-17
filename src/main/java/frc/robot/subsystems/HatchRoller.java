@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HatchRoller extends Subsystem{
 	TalonSRX HatchMotor;
 
-	DoubleSolenoid push;
+	public DoubleSolenoid push;
 
 	public HatchRoller() {
 		HatchMotor  = new TalonSRX(RobotMap.HATCH_ROLLER);
