@@ -20,22 +20,22 @@ public class DriveWithJoystick extends Command {
 	public void execute() {
 		l = Robot.OI.getLeftSpeed(); r = Robot.OI.getRightSpeed();
 
-		if(Robot.OI.trackAllowed()) {
-			Robot.limelight.setLedMode(Limelight.LED_ON);
+		// if(Robot.OI.trackAllowed()) {
+		// 	//Robot.limelight.setLedMode(Limelight.LED_ON);
 
-			if(Robot.limelight.getTx() > Constants.LIMELIGHT_THRESHOLD || Robot.limelight.getTx() < -Constants.LIMELIGHT_THRESHOLD) {
-				l +=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
-				r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
+		// 	if(Robot.limelight.getTx() > Constants.LIMELIGHT_THRESHOLD || Robot.limelight.getTx() < -Constants.LIMELIGHT_THRESHOLD) {
+		// 		l +=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
+		// 		r -=  (Robot.limelight.getTx() * Constants.LIMELIGHT_KP) + ((Robot.limelight.getTx()-oldTx)*Constants.LIMELIGHT_KD);
 
-				oldTx = Robot.limelight.getTx();
-			}
-		}
-		// else if(Robot.OI.flashyBoi()) {
-		// 	Robot.limelight.setLedMode(Limelight.LED_BLINK);
+		// 		oldTx = Robot.limelight.getTx();
+		// 	}
 		// }
-		else {
-			Robot.limelight.setLedMode(Limelight.LED_OFF);
-		}
+		// // else if(Robot.OI.flashyBoi()) {
+		// // 	Robot.limelight.setLedMode(Limelight.LED_BLINK);
+		// // }
+		// else {
+		// 	Robot.limelight.setLedMode(Limelight.LED_OFF);
+		// }
 
 		Robot.drivetrain.setMotors(l, r);
 	}

@@ -46,7 +46,7 @@ public class OI {
 		
 		//leftJoystickButton.whenPressed(new SetWrist(Constants.WRIST_HATCH));
 
-		rightBump.whenPressed(new RunHatch(0.6));
+		rightBump.whenPressed(new RunHatch(1.0));
 		leftBump.whenPressed(new ScoreHatch());
 
 		//menuButton.whenPressed(new RunElevator(0.3));
@@ -54,8 +54,8 @@ public class OI {
 		startButton.whenPressed(new SetPushy(1));
 		
 		//menuButton.whenReleased(new RunElevator(0.0));
-		rightBump.whenReleased(new RunHatch(0.1));
-		leftBump.whenReleased(new RunHatch(0.1));
+		rightBump.whenReleased(new RunHatch(0.05));
+		leftBump.whenReleased(new RunHatch(0.05));
 		
 		upRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL2));
 		downRightPad.whenPressed(new SetElevator(Constants.ELEVATOR_LEVEL3));

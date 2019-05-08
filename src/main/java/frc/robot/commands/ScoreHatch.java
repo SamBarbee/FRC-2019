@@ -18,7 +18,7 @@ public class ScoreHatch extends CommandGroup {
   public ScoreHatch() {
     addParallel(new SetPushy(true));
     addSequential(new WaitCommand(0.2));
-    addParallel(new RunHatch(-0.5));
+    addParallel(new RunHatch(-0.625));
     addSequential(new WaitCommand(0.2));
     addParallel(new RunHatch(0.0));
     addParallel(new SetPushy(false));

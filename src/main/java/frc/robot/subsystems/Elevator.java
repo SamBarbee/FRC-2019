@@ -65,7 +65,7 @@ public class Elevator extends Subsystem{
 		motor1.configNominalOutputReverse(0.0, 0);
 
 		motor1.configPeakOutputForward(1.0, 0);
-		motor1.configPeakOutputReverse(-0.4, 0);
+		motor1.configPeakOutputReverse(-0.5, 0);
 		//motor1.configForwardSoftLimitThreshold(Constants.ELEVATOR_SOFT_LIMIT, 0);
 		
 		

@@ -17,7 +17,7 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Wrist wrist = new Wrist(); 
 	public static final OI OI = new OI();
-	public static final Limelight limelight = new Limelight(); 
+	//public static final Limelight limelight = new Limelight(); 
 	private static double newInterval = 0.015;
 	public Robot(){
 		super(newInterval);
@@ -27,23 +27,23 @@ public class Robot extends TimedRobot {
 
 		
 
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();;
-		camera.setFPS(15);
-		camera.setResolution(320, 240); // used to be 320 = width, 240 = height
+		//UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();;
+		//camera.setFPS(15);
+		//camera.setResolution(320, 240); // used to be 320 = width, 240 = height
 
-		limelight.setLedMode(Limelight.LED_OFF);
+		//limelight.setLedMode(Limelight.LED_OFF);
 		
 	
 	};
 	@Override
 	public void disabledInit() {
-		Robot.limelight.setLedMode(Limelight.LED_OFF);
+		//Robot.limelight.setLedMode(Limelight.LED_OFF);
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		Robot.limelight.setLedMode(Limelight.LED_OFF);
+		//Robot.limelight.setLedMode(Limelight.LED_OFF);
 		//System.out.printf("%d",wrist.GetWristPosition());
 	}
 

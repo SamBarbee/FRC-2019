@@ -14,22 +14,22 @@ public class Constants {
 	//ELEVATOR
 	public static final int ELEVATOR_LEVEL3 = 30000;
 	public static final int ELEVATOR_LEVEL2 = 17500;
-	public static final int ELEVATOR_BALL_1 = 3750;
-	public static final int ELEVATOR_BALL_2 = 16000;
-	public static final int ELEVATOR_BALL_3 = 30000;
+	public static final int ELEVATOR_BALL_1 = 3550;
+	public static final int ELEVATOR_BALL_2 = 15000;
+	public static final int ELEVATOR_BALL_3 = 29000;
 
-	public static final int ELEVATOR_BALL_CARGO = 18250;
+	public static final int ELEVATOR_BALL_CARGO = 17500;
 
 	public static final int ELEVATOR_SOFT_LIMIT = 31000;
 
 	
-	public static final double ELEVATOR_P = 0.136;//0.35;
-	public static final double ELEVATOR_I = 0.0;//0.00;
-	public static final double ELEVATOR_D = 0.4;//0.5;
+	public static final double ELEVATOR_P =0.136;
+	public static final double ELEVATOR_I = 0.0;//0.0;/
+	public static final double ELEVATOR_D = 0.4;
  
 	public static final double ELEVATOR_ZERO = 1.0;
 	public static final double ELEVATOR_ZERO_F = -0.125;
-	public static final double ELEVATOR_F = 0.07;
+	public static final double ELEVATOR_F = 0.125;
 	public static final double ELEVATOR_F_DOWN = 0.05;
 	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION = 800.0;
 	public static final double ELEVATOR_ZERO_NEUTRAL_POSITION_DEADBAND = 50.0;
@@ -59,9 +59,9 @@ public class Constants {
 	public static final double WRIST_NO_IN_ELEVATOR = 750;
 	public static final double WRIST_BOTTOM = 3250;
 	
-	public static final double WRIST_P = 0.3;
+	public static final double WRIST_P = 0.375;
 	public static final double WRIST_I = 0.00;
-	public static final double WRIST_D = 0.10;
+	public static final double WRIST_D = 0.65;
 
 
 	

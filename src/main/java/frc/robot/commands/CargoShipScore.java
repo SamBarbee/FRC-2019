@@ -8,16 +8,14 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class CargoShipScore extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
   public CargoShipScore() {
     addParallel(new SetElevator(Constants.ELEVATOR_BALL_CARGO));
+    addSequential(new WaitCommand(0.4));
     addParallel(new SetWrist(Constants.WRIST_CARGOSHIP));
   }
 }
